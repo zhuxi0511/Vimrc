@@ -31,7 +31,6 @@ Plugin 'thinca/vim-ref'
 Plugin 'The-NERD-tree'
 Plugin 'jistr/vim-nerdtree-tabs'
 nmap <silent> <F2> :NERDTreeTabsToggle<CR>
-
 Plugin 'FencView.vim'
 let g:fencview_autodetect=1
 
@@ -46,6 +45,8 @@ Plugin 'bogado/file-line'
 Plugin 'rizzatti/funcoo.vim'
 Plugin 'rizzatti/dash.vim'
 nmap <leader>d <Plug>DashSearch<cr>
+
+Plugin 'Yggdroot/indentLine'
 
 call vundle#end()          
 
@@ -83,7 +84,7 @@ set incsearch
 set encoding=utf-8
 set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
 
-set backupdir=~/Work/VimBackUp
+"set backupdir=~/Work/VimBackUp
 
 set statusline=%F%(\ %m%r%h%w%)\ [%{&ff}]\ [%Y]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}%=[0x%B]\ [%l,%(%c%V%)]\ [%P]
 
@@ -102,7 +103,11 @@ set noimdisable
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set t_Co=256
 colorscheme wombat256mod
-set guifont=Monaco:h13
+if (APPLE)
+    set guifont=Monaco:h13
+else
+    set guifont=Monospace\ 11
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Unity js setting
@@ -112,3 +117,9 @@ if s:extfname ==?"js"
        set dictionary+=~/.vim/unity/Dict/UnityCS.txt
     set complete +=k
 endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => For gui setting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set guioptions-=T
+set guioptions-=m

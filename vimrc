@@ -18,7 +18,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'Tagbar'
 nmap <silent> <F4> :TagbarToggle<CR>
@@ -47,6 +47,8 @@ Plugin 'rizzatti/dash.vim'
 nmap <leader>d <Plug>DashSearch<cr>
 
 Plugin 'Yggdroot/indentLine'
+
+Plugin 'michalbachowski/vim-wombat256mod.git'
 
 call vundle#end()          
 
@@ -84,7 +86,7 @@ set incsearch
 set encoding=utf-8
 set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
 
-"set backupdir=~/Work/VimBackUp
+set backupdir=~/Work/VimBackUp
 
 set statusline=%F%(\ %m%r%h%w%)\ [%{&ff}]\ [%Y]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}%=[0x%B]\ [%l,%(%c%V%)]\ [%P]
 

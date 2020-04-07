@@ -41,9 +41,9 @@ let g:fencview_autodetect=1
 
 Plugin 'bogado/file-line'
 
-Plugin 'rizzatti/funcoo.vim'
-Plugin 'rizzatti/dash.vim'
-nmap <leader>d <Plug>DashSearch<cr>
+"Plugin 'rizzatti/funcoo.vim'
+"Plugin 'rizzatti/dash.vim'
+"nmap <leader>d <Plug>DashSearch<cr>
 
 Plugin 'Yggdroot/indentLine'
 
@@ -54,7 +54,7 @@ let g:ctrlp_map = ',,'
 let g:ctrlp_cmd = 'CtrlP'
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'ycm-core/YouCompleteMe'
 set completeopt=longest,menu	"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif	"离开插入模式后自动关闭预览窗口
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"	"回车即选中当前项
@@ -99,12 +99,16 @@ let g:ycm_filetype_blacklist = {
 " 修改对C函数的补全快捷键，默认是CTRL + space，修改为ALT + ;
 let g:ycm_key_invoke_completion = '<M-;>'
 
+
+" support go language 
+Plugin 'fatih/vim-go'
+
 call vundle#end()          
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-imap ff <ESC>
+"imap ff <ESC>
 map <C-k> <C-w><Up>            " ctrl-k 切换到上边窗口
 map <C-j> <C-w><Down>          " ctrl-j 切换到下边窗口
 map <C-l> <C-w><Right>         " ctrl-l 切换到右边窗口
@@ -135,7 +139,7 @@ set incsearch
 set encoding=utf-8
 set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
 
-set backupdir=~/Work/VimBackUp
+set backupdir=~/VimBackUp
 
 set statusline=%F%(\ %m%r%h%w%)\ [%{&ff}]\ [%Y]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}%=[0x%B]\ [%l,%(%c%V%)]\ [%P]
 

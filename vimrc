@@ -6,8 +6,8 @@ if has('unix')
 endif
 let APPLE= s:uname == "Darwin"
 
-let mapleader = ","
-let g:mapleader = ","
+"let mapleader = ","
+"let g:mapleader = ","
 
 "---------------------
 " Vundle Plugin
@@ -29,7 +29,7 @@ Plugin 'a.vim'
 Plugin 'thinca/vim-ref'
 Plugin 'The-NERD-tree'
 Plugin 'jistr/vim-nerdtree-tabs'
-nmap <silent> <F2> :NERDTreeTabsToggle<CR>
+nmap <leader>h :noh<CR>
 Plugin 'FencView.vim'
 let g:fencview_autodetect=1
 
@@ -40,6 +40,8 @@ let g:fencview_autodetect=1
 " nmap <leader>s g:jedi#goto_definitions_command<cr>
 
 Plugin 'bogado/file-line'
+
+Plugin 'tpope/vim-fugitive'
 
 "Plugin 'rizzatti/funcoo.vim'
 "Plugin 'rizzatti/dash.vim'
@@ -66,6 +68,7 @@ inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 " 跳转到定义处
 " nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nmap <C-[> <plug>(YCMHover)
 " nnoremap <F6> :YcmForceCompileAndDiagnostics<CR>	"force recomile with syntastic
 " nnoremap <leader>lo :lopen<CR>	"open locationlist
 " nnoremap <leader>lc :lclose<CR>	"close locationlist
@@ -99,9 +102,23 @@ let g:ycm_filetype_blacklist = {
 " 修改对C函数的补全快捷键，默认是CTRL + space，修改为ALT + ;
 let g:ycm_key_invoke_completion = '<M-;>'
 
+let g:ycm_gopls_args = ['-remote=auto']
+"let g:ycm_gopls_binary_path = 'gopls'
+
 
 " support go language 
 Plugin 'fatih/vim-go'
+"let g:go_gopls_options = ['-remote auto']
+"let g:go_gopls_options = ['-remote=auto']
+map <C-p> :GoFillStruct<CR>
+
+Plugin 'easymotion/vim-easymotion'
+map f <Plug>(easymotion-s)
+
+Plugin 'kassio/neoterm'
+let &runtimepath.=',~/.vim/bundle/neoterm'
+let g:neoterm_default_mod='botright'
+let g:neoterm_autoinsert=1
 
 call vundle#end()          
 
@@ -109,12 +126,19 @@ call vundle#end()
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "imap ff <ESC>
-map <C-k> <C-w><Up>            " ctrl-k 切换到上边窗口
-map <C-j> <C-w><Down>          " ctrl-j 切换到下边窗口
-map <C-l> <C-w><Right>         " ctrl-l 切换到右边窗口
-map <C-h> <C-w><Left>          " ctrl-h 切换到左边窗口
+map <C-k> <C-w><Up>
+map <C-j> <C-w><Down>
+map <C-l> <C-w><Right>
+map <C-h> <C-w><Left>
 inoremap {<CR> {<CR>}<ESC>O
 "map <F5> :!python %<CR>
+
+tnoremap <C-k> <C-w><Up>
+tnoremap <C-j> <C-w><Down>
+tnoremap <C-l> <C-w><Right>
+tnoremap <C-h> <C-w><Left>
+map <C-s> :Ttoggle<CR>
+tnoremap <C-s> <C-w>:Ttoggle<CR>
 
 syntax on
 filetype plugin indent on 
@@ -139,9 +163,9 @@ set incsearch
 set encoding=utf-8
 set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
 
-set backupdir=~/VimBackUp
+"set backupdir=~/VimBackUp
 
-set statusline=%F%(\ %m%r%h%w%)\ [%{&ff}]\ [%Y]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}%=[0x%B]\ [%l,%(%c%V%)]\ [%P]
+set statusline=%F%(\ %m%r%h%w%)\ [%{&ff}]\ [%Y]%=%{FugitiveStatusline()}\ [0x%B]\ [%l,%(%c%V%)]
 
 au BufNewFile,BufRead *.py,*.pyw,*.pyc setf python
 au BufNewFile,BufRead *.mako set ft=mako
@@ -182,3 +206,5 @@ map <A-]> gt          " 下一个tab
 map <A-[> gT          " 上一个tab
 map <A-t> :tabnew<CR> " 新tab
 map <A-w> :tabclose<CR> " 关闭tab
+
+au VimEnter * if &diff | execute 'windo set wrap' | endif
